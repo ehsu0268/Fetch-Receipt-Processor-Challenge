@@ -33,10 +33,14 @@ In order to calculate the points, I created a series of utility classes in point
 In addition, to interact with the database, I created a `DBStore` class in db.py which has 
 methods to write and read from csv files in the data directory. 
 
-## Unit test
+## Unit Test
 
 To do some testing of the application, it will be important to set the 
-environment variable `UNIT_TEST`. This variable will determine which 
+environment variable `UNIT_TEST`:
+
+```EXPORT UNIT_TEST=True```
+
+This variable will determine which 
 data file to write to or read from to allow for separation of data. 
 
 ## Closing 
