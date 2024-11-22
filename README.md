@@ -1,10 +1,13 @@
 # Receipt Processor
 
-The challenge is to build a webservice that has the API endpoints as specified. 
+The challenge is to build a webservice that has the API endpoints as specified:
+
+1. POST --> /receipts/process: Body: JSON payload, Output: JSON containing id for receipt.
+2. GET --> /receipts/{id}/points: Body: N/A, Output: JSON containing the number of points.
 
 ## Workflow
 
-I used the Python and the Django framework as the technologies for the assignment. 
+I used Python and the Django framework as the technologies for the assignment. 
 
 Per the instructions, since it was sufficent to store the data in memory, 
 no models were built and instead, data is being persisted in files in the 
