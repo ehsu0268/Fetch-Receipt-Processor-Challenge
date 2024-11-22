@@ -1,5 +1,3 @@
-import os
-
 from django.http import HttpResponseBadRequest, HttpResponseNotFound
 from rest_framework import viewsets
 from rest_framework.decorators import action
