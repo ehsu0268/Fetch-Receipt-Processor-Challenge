@@ -8,7 +8,7 @@ class ItemSerializer(serializers.Serializer):
 
 class ReceiptSerializer(serializers.Serializer):
     retailer = serializers.CharField(max_length=100)
-    purchaseDate = serializers.DateField(format='%Y-%m-%d')
-    purchaseTime = serializers.TimeField(format='%H:%M')
+    purchaseDate = serializers.DateField(format="%Y-%m-%d")
+    purchaseTime = serializers.TimeField(format="%H:%M")
     items = ItemSerializer(many=True)
     total = serializers.DecimalField(max_digits=100, decimal_places=2)

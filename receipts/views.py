@@ -12,14 +12,14 @@ from .db import DBStore
 class ReceiptViewSet(viewsets.ViewSet):
     db_store = DBStore()
 
-    @action(methods=['GET'], detail=True)
+    @action(methods=["GET"], detail=True)
     def points(self, request, pk):
         points = self.db_store.get(pk)
         if points == -1:
             return HttpResponseNotFound()
         return Response({"points": points})
 
-    @action(methods=['POST'], detail=False)
+    @action(methods=["POST"], detail=False)
     def process(self, request):
         receipt_serializer = ReceiptSerializer(data=request.data)
         if not receipt_serializer.is_valid():

@@ -13,7 +13,9 @@ disabled_cursor.WRAP_ERROR_ATTRS = CursorWrapper.WRAP_ERROR_ATTRS
 class TestReceipts(APITestCase):
 
     def setUp(self) -> None:
-        self.receipts_view = ReceiptViewSet.as_view({"post": "process", "get": "points"})
+        self.receipts_view = ReceiptViewSet.as_view(
+            {"post": "process", "get": "points"}
+        )
         self.request_factory: APIRequestFactory = APIRequestFactory()
 
     def test_process_simple_receipt(self):
@@ -22,17 +24,19 @@ class TestReceipts(APITestCase):
             "purchaseDate": "2022-01-02",
             "purchaseTime": "13:13",
             "total": "1.25",
-            "items": [
-                {"shortDescription": "Pepsi - 12-oz", "price": "1.25"}
-            ]
+            "items": [{"shortDescription": "Pepsi - 12-oz", "price": "1.25"}],
         }
-        request = self.request_factory.post(path="/receipts/process", data=input_data, format="json")
+        request = self.request_factory.post(
+            path="/receipts/process", data=input_data, format="json"
+        )
         response = self.receipts_view(request)
         self.assertEqual(response.status_code, 200)
-        request = self.request_factory.get(path="/receipts/" + response.data['id'] + "/points")
-        response = self.receipts_view(request, pk=response.data['id'])
+        request = self.request_factory.get(
+            path="/receipts/" + response.data["id"] + "/points"
+        )
+        response = self.receipts_view(request, pk=response.data["id"])
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data['points'], 31)
+        self.assertEqual(response.data["points"], 31)
 
     def test_process_morning_receipt(self):
         input_data = {
@@ -42,16 +46,20 @@ class TestReceipts(APITestCase):
             "total": "2.65",
             "items": [
                 {"shortDescription": "Pepsi - 12-oz", "price": "1.25"},
-                {"shortDescription": "Dasani", "price": "1.40"}
-            ]
+                {"shortDescription": "Dasani", "price": "1.40"},
+            ],
         }
-        request = self.request_factory.post(path="/receipts/process", data=input_data, format="json")
+        request = self.request_factory.post(
+            path="/receipts/process", data=input_data, format="json"
+        )
         response = self.receipts_view(request)
         self.assertEqual(response.status_code, 200)
-        request = self.request_factory.get(path="/receipts/" + response.data['id'] + "/points")
-        response = self.receipts_view(request, pk=response.data['id'])
+        request = self.request_factory.get(
+            path="/receipts/" + response.data["id"] + "/points"
+        )
+        response = self.receipts_view(request, pk=response.data["id"])
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.data['points'], 15)
+        self.assertEqual(response.data["points"], 15)
 
     def test_process_receipt_bad_request(self):
         input_data = {
@@ -59,11 +67,11 @@ class TestReceipts(APITestCase):
             "purchaseDate": "2022-01-02",
             "purchaseTime": "13:13",
             "total": "1.25",
-            "items": [
-                {"shortDescription": "Pepsi - 12-oz", "price": "1.25"}
-            ]
+            "items": [{"shortDescription": "Pepsi - 12-oz", "price": "1.25"}],
         }
-        request = self.request_factory.post(path="/receipts/process", data=input_data, format="json")
+        request = self.request_factory.post(
+            path="/receipts/process", data=input_data, format="json"
+        )
         response = self.receipts_view(request)
         self.assertEqual(response.status_code, 400)
 
@@ -73,11 +81,11 @@ class TestReceipts(APITestCase):
             "purchaseDate": "2022-01-02",
             "purchaseTime": "13:13",
             "total": "1.25",
-            "items": [
-                {"shortDescription": "Pepsi - 12-oz", "price": "1.25"}
-            ]
+            "items": [{"shortDescription": "Pepsi - 12-oz", "price": "1.25"}],
         }
-        request = self.request_factory.post(path="/receipts/process", data=input_data, format="json")
+        request = self.request_factory.post(
+            path="/receipts/process", data=input_data, format="json"
+        )
         response = self.receipts_view(request)
         self.assertEqual(response.status_code, 200)
         request = self.request_factory.get(path="/receipts/" + "123456" + "/points")
