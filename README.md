@@ -24,6 +24,14 @@ Here's a command to run the docker image:
 
 ```docker run -it -p 8000:8000 receipt_processor```
 
+If running locally, the root endpoint is the following:
+
+```http://localhost:8000/```
+
+If running with docker, the root endpoint is the following:
+
+```http://0.0.0.0:8000/```
+
 ## Design Considerations
 
 Per Django, I created two routes in the views file. 
