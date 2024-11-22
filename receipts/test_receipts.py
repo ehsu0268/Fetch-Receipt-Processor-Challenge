@@ -1,15 +1,7 @@
-import mock
 from rest_framework.test import APITestCase, APIRequestFactory
 from receipts.views import ReceiptViewSet
-from django.db.backends.utils import CursorWrapper
-
-disabled_cursor = mock.Mock()
-disabled_cursor.side_effect = RuntimeError("db access disabled")
-disabled_cursor.WRAP_ERROR_ATTRS = CursorWrapper.WRAP_ERROR_ATTRS
 
 
-@mock.patch("django.db.backends.utils.CursorWrapper", disabled_cursor)
-@mock.patch("django.db.backends.utils.CursorDebugWrapper", disabled_cursor)
 class TestReceipts(APITestCase):
 
     def setUp(self) -> None:
